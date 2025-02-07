@@ -24,8 +24,8 @@ function getCartTotalAmount() {
     const product = PRODUCTS.find((p) => p.id === item.id);
     result += product.price * item.quantity;
     // Write your code here
-    return result;
   });
+  return result;
 }
 
 /**
