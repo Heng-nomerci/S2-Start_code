@@ -20,8 +20,12 @@ const SHOPPING_CART = [
  */
 function getCartTotalAmount() {
   let result = 0;
-  // Write your code here
-  return result;
+  SHOPPING_CART.forEach((item) => {
+    const product = PRODUCTS.find((p) => p.id === item.id);
+    result += product.price * item.quantity;
+    // Write your code here
+    return result;
+  });
 }
 
 /**
@@ -37,6 +41,12 @@ function getCartTotalAmount() {
  */
 function addProductToCart(productId) {
   // Write your code here
+  const existingProduct = SHOPPING_CART.find((p) => p.id === productId);
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    SHOPPING_CART.push({ id: productId, quantity: 1 });
+  }
 }
 
 /**
@@ -55,6 +65,15 @@ function addProductToCart(productId) {
  */
 function removeProductFromCart(productId) {
   // Write your code here
+  const existingProduct = SHOPPING_CART.find((p) => p.id === productId);
+  if (existingProduct) {
+    if (existingProduct.quantity > 1) {
+      existingProduct.quantity--;
+    } else {
+      const productIndex = SHOPPING_CART.findIndex((p) => p.id === productId);
+      SHOPPING_CART.splice(productIndex, 1);
+    }
+  }
 }
 
 // --------------------------------------------------------
